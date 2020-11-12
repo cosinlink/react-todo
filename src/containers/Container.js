@@ -91,23 +91,21 @@ const Container = (props) => {
     console.log(x, y)
     console.log(`dataGenerated: ${dataGenerated}`)
 
-    let data
     // first click
     if (!dataGenerated) {
-      data = generateDataForFirstClick(x, y)
+      generateDataForFirstClick(x, y)
       setDataGenerated(true)
-    } else { // not first click
-      data = squareData
     }
+    // ?? here, squareData is not refresh by line 96 generateDataForFirstClick, why ?
+    console.log(`squareData: ${squareData}`)
 
-    console.log(`squareData: ${data}`)
     // click mine
-    if (data[x][y] === MINE_NUMBERS.MINE) {
+    if (squareData[x][y] === MINE_NUMBERS.MINE) {
       return endGame();
     }
 
     // click empty button whose number = 0
-    setSquareDisplayed((prev) => renderButtonsDisplayed(prev, data, x, y));
+    setSquareDisplayed((prev) => renderButtonsDisplayed(prev, squareData, x, y));
   };
 
   const generateButtons = function () {
