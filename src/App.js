@@ -19,15 +19,19 @@ export default function App() {
 
     const handleSubmit = (event) => {
         setAllTasks((prevTasks) => {
-            return [...prevTasks, newTask]
+            return [...prevTasks, {
+                ...newTask,
+                id: Math.random()
+            }]
         });
         event.preventDefault();
     };
 
     const handleDelete = (idToRemove) =>
-        setAllTasks((prevTasks) =>
-            prevTasks.filter((item, index, arr) => item.id !== idToRemove)
-        );
+        setAllTasks((prevTasks) =>{
+            log(prevTasks)
+            return prevTasks.filter((item, index, arr) => item.id !== idToRemove)
+        });
 
     return (
         <main>
